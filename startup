@@ -1,4 +1,4 @@
---os.pullEvent = os.pullEventRaw
+os.pullEvent = os.pullEventRaw
 menu = {}
 links = {}
 cursor = 1
