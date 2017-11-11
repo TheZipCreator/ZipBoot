@@ -1,0 +1,46 @@
+--os.pullEvent = os.pullEventRaw
+menu = {}
+links = {}
+cursor = 1
+apoint = 9
+shell.run("bootimages")
+term.setBackgroundColor(colors.black)
+term.clear()
+term.setTextColor(colors.white)
+function centertext(text, y)
+  term.setCursorPos( 25-(#text /2), y)
+  term.write(text)
+end
+function drawMenu()
+  for i=1,#menu do
+    if(i == cursor) then
+      centertext("["..menu[i].."]", apoint+i)
+    else
+      centertext(" "..menu[i].." ", apoint+i)
+    end
+  end
+  centertext("Select a boot image", 1)
+end
+drawMenu()
+while true do
+  event, key = os.pullEvent("key")
+  if(key == keys.up) then
+    cursor = cursor-1
+  end
+  if(key == keys.down) then
+    cursor = cursor+1
+  end
+  if(key == keys.enter) then
+    apoint = 9
+    for i=1, #links do
+      if(i == cursor) then
+        term.setBackgroundColor(colors.black)
+        term.clear()
+        shell.run(links[i])
+      end
+    end
+  end
+  drawMenu()
+  sleep(0.1)
+end
+
